@@ -1,0 +1,22 @@
+{
+  "name": "garagescript",
+  "version": "1.0.0",
+  "description": "Projects for garagescript",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evo777/GarageScript.git"
+  },
+  "author": "Emmanuel Vo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evo777/GarageScript/issues"
+  },
+  "homepage": "https://github.com/evo777/GarageScript#readme",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
+}
