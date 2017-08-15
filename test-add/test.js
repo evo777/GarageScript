@@ -1,7 +1,7 @@
 const add = require('./add.js');
 
-const test = (a, b, c) => {
-  if (add(a, b) === c) {
+const test = (num1, num2, sum) => {
+  if (add(num1, num2) === sum) {
     console.log('Correct');
   }
   console.log('Incorrect');
