@@ -1,0 +1,52 @@
+Vim
+
+Insert mode:
+
+i - lets you go to insert mode at the cursor point
+I - lets you go to insert mode at the start of line
+a - go to insert mode after the cursor
+A - go to insert mode at the end of the line
+o - go to insert mode and creates a new line below cursor
+O - go to insert mode and creates a new line above curosr
+
+
+Normal mode:
+
+:w - saves your vim file
+:q - quit your vim editor
+:q! - force quit
+h - moves left 
+j - moves up
+k - moves down
+l - moves right
+$ - moves curosr to the end of the line
+gg - go to top of line
+#G - go to the line number that specified
+{ - move to the previous paragraph
+} - move to the next paragraph
+dd - delete current line
+
+
+Git
+
+git init - puts your project into control version
+git status - check to see which files needs to be staged or has been changed
+git add - adds your files to be staged
+git commit - commits your files to be ready to be push (Push it to yoru branch)
+git log - shows all your commits on the branch
+git branch - shows all your branches
+git checkout -b branch_name - creates the new branch with your branch
+git checkout - checkout the commit at that instance
+git fetch - fetches all the commits of everyone on that project
+git rebase - applies everyone's commit
+
+
+Unix 
+
+pwd - show present working directory
+ls - shows everything in the current directory
+cd - change directory
+sudo - gives root permission
+cd .. - go back previous directory
+mkdir - make directory
+
