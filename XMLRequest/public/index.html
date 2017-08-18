@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <input id="field1" />
+    <input id="field2" />
+    <input type="submit" id="sb" />
+    <div id="chat"></div>
+
+    <script>
+      const xml = new XMLHttpRequest();
+      const submitButton = document.getElementById('sb');
+      const chat = document.getElementById('chat');
+      submitButton.onclick = () => {
+        const f1 = document.getElementById('field1').value;
+        const f2 = document.getElementById('field2').value;
+        xml.open('GET', '/llip?field1='+f1+'&field2='+f2);
+        xml.send();
+      };
+      const sendChat = () => {
+        xml.open("GET", "/message.txt");
+        xml.onreadystatechange = () => {
+          if (xml.responseText) {
+            chat.innerHTML = xml.responseText;
+          }
+        };
+        xml.send();
+      };  
+      window.setInterval(sendChat, 1000);
+    </script>
+  </body>
+</html>
