@@ -5,7 +5,16 @@ const app = express();
 const port = 3000;
 
 app.get('/llip', (req, res) => {
-  fs.appendFile();
+  const getNames = (err, file) => {
+    const names = [];
+    file.forEach(name => {
+      if (name !== 'emmanuel') {
+        names.push(name);
+      }
+    });
+    return names;
+  };
+  fs.readdir('./home', getNames);
 });
 
 app.listen(port, () => {
