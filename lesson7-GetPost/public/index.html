@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <input id="field1" />
-    <input id="field2" />
-    <input type="submit" id="sb"/>
+    <input id="username" />
+    <input id="comment" />
+    <input type="submit" id="subButton"/>
     <pre id="chat"></pre>
 
     <script>
       const xml = new XMLHttpRequest();
-      const submitButton = document.getElementById('sb');
+      const submitButton = document.getElementById('subButton');
       submitButton.onclick = () => {
-        const f1 = document.getElementById('field1').value;
-        const f2 = document.getElementById('field2').value;
+        const username = document.getElementById('username').value;
+        const comment = document.getElementById('comment').value;
         xml.open('POST', '/llip');
         xml.setRequestHeader('Content-Type', 'application/json');
         xml.send(
           JSON.stringify({
-            name: f1,
-            comment: f2
+            username: username,
+            comment: comment
           })
         );
       };
