@@ -9,7 +9,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 app.post('/llip', (req, res) => {
-  fs.appendFile('./public/message.txt', req.body.username+': '+req.body.comment+'\r\n');
+  fs.appendFile('./public/message.txt', `${req.body.username}: ${req.body.comment}` + '\r\n');
 });
 
 app.listen(port, () => {

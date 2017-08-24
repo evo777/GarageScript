@@ -7,7 +7,7 @@ const app = express();
 app.use(express.static('public'));
 
 app.get('/llip', (req, res) => {
-  fs.appendFile('./public/message.txt', req.query.field1+': '+req.query.field2+'\r\n');
+  fs.appendFile('./public/message.txt', `${req.query.username}: ${req.query.comment}`+'\r\n');
 });
 
 app.listen(port, () => {
