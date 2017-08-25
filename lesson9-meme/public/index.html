@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Meme</title>
+  </head>
+  <body>
+    <video id="video"></video>
+    <canvas id="canvas" style="height: 200px; width: 200px;"></canvas>
+    <input id="name" />
+    <input id="comment" />
+    <input id="subButton" type="submit" />
+
+    <script>
+      const video = document.getElementById('video');
+      const name = document.getElementById('name').value;
+      const comment = document.getElementById('comment').value;
+      const submitButton = document.getElementById('subButton');
+      const canvas = document.getElementById('canvas');
+      const xml = new XMLHttpRequest();
+      navigator.mediaDevices.getUserMedia({video: true, audio: false})
+               .then((s) => {
+                 video.srcObject = s;
+                 video.play();
+               })
+               .catch((err) => {
+                 console.log(err);
+               });
+      submitButton.onclick = () => {
+        const context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0);
+        const dataURL = canvas.toDataURL('image/png');
+        xml.open("POST", "/picture");
+        xml.setRequestHeader('content-type', 'application/json');
+        xml.send(JSON.stringify({
+          name: name,
+          comment: comment,
+          image: dataURL
+        }));
+      };
+    </script>
+  </body>
+</html
