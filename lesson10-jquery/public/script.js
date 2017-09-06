@@ -1,24 +1,7 @@
-$('#subButton').click(() => {
-  const comment = $('#comment').val();
-  const message = $('#message').val();
-  $.ajax({
-    type: 'POST',
-    url: '/submit',
-    contentType: 'application/json',
-    data: JSON.stringify({
-      name,
-      message
-    }),
-    success: (data) => {
-      console.log('data: ', data);
-    }
-  });
-});
-
 const chatFile = () => {
-  $.get('file.txt', (data) => {
-    const content = $('#message').val();
-    content.innerHTML = data;
+  $.get('/file.txt', data => {
+    const display = $('#message');
+    display.html(data);
   });
 };
 
@@ -36,22 +19,20 @@ navigator.mediaDevices.getUserMedia({
 });
 
 $('#takePicture').click(() => {
-  const name = $('#comment').val();
-  const message = $('#message').val();
-
+  const name = $('#name').val();
+  const comment = $('#comment').val();
   const canvas = $('#canvas')[0];
   const context = canvas.getContext('2d');
   context.drawImage(video, 0, 0);
   const dataURL = canvas.toDataURL('image/png');
-
   //Making a POST request when picture is taken
-  $.ajaxx({
+  $.ajax({
     type: 'POST',
     url: '/pictures',
     data: JSON.stringify({
       canvas: dataURL,
-      name,
-      message
+      name: name,
+      comment: comment
     }),
     success: (data) => {
       console.log('Data: ', data);
