@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webcam</title>
+</head>
+<body>
+  <video id="video" style="height: 150px; width: 150px;"></video>
+  <canvas id="canvas" style="height: 100px; width: 100px;"></canvas>
+  <input type="submit" id="subButton"/>
+  
+  <script>
+    const subButton = document.getElementById('subButton');
+    const canvas = document.getElementById('canvas');
+    const xml = new XMLHttpRequest();
+    const video = document.getElementById("video");
+    navigator.mediaDevices.getUserMedia({video: true, audio: false})
+             .then((s) => {
+               video.srcObject = s;
+               video.play();
+             })
+             .catch((err) => {
+               console.log(err);
+             });
+    subButton.onclick = () => {
+      const context = canvas.getContext('2d');
+      context.drawImage(video, 0, 0);
+      const dataURL = canvas.toDataURL('image/png');
+      xml.open("POST", "/llip");
+      xml.setRequestHeader("content-type", "application/json");
+      xml.send();
+    };
+  </script>
+</body>
+</html>
