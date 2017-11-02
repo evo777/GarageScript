@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <input id="field1" />
+    <input id="field2" />
+    <input type="submit" id="sb"/>
+    <pre id="chat"></pre>
+
+    <script>
+      const xml = new XMLHttpRequest();
+      const submitButton = document.getElementById('sb');
+      submitButton.onclick = () => {
+        const f1 = document.getElementById('field1').value;
+        const f2 = document.getElementById('field2').value;
+        xml.open('POST', '/llip');
+        xml.setRequestHeader('Content-Type', 'application/json');
+        xml.send(
+          JSON.stringify({
+            name: f1,
+            comment: f2
+          })
+        );
+      };
+     const sendMessage = () => {
+       xml.open('GET', '/message.txt');
+       xml.onreadystatechange = () => {
+         if (xml.responseText) {
+           const div = document.getElementById('chat');
+           div.innerHTML = xml.responseText;
+         }
+       };
+       xml.send();
+     };
+     window.setInterval(sendMessage, 1000);
+    </script>
+  </body>
+</html>
