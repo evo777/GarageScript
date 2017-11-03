@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todo Redux</title>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.7.2/redux.js"></script>
+  </head>
+  <body>
+    <p>Enter your to-do task here: <input id="todo-task"/></p>
+    <button id="submitButton">Add Todo</button>
+    <div id="todos"></div>
+    <script>
+      const reducers = Redux.combineReducers({
+        todos: (state={todos: []}, action) => {
+          switch(action.type) {
+            case 'ADD_TODO':
+              let newState = state.todos.push(action.task);
+              return Object.assign({}, state, {todo: newState});
+            case 'DELETE_TODO':
+              let newState2 = state.todos.splice(action.index, 1);
+              return Object.assign({}, state, {todo: newState2})
+            default:
+              return state;
+          }
+        }
+      });
+
+      const store = Redux.createStore(reducers);
+
+      const submitButton = document.getElementById('submitButton');
+      submitButton.onclick = () => {
+        const todos = document.getElementById('todos');
+        const todoTask = document.getElementById('todo-task').value;
+        store.dispatch({
+          type: 'ADD_TODO',
+          task: todoTask
+        });
+        let func = () => {
+          let string = "";
+          let array = store.getState().todos.todos;
+          array.forEach((todo, i) => {
+            string += `<div class=item id=${i}>${todo}</div>`;
+          });
+          todos.innerHTML = string;
+          document.querySelectorAll('.item').forEach((item, i) => {
+            item.onclick = () => {
+              store.dispatch({
+                type: 'DELETE_TODO',
+                index: i
+              })
+              func();
+            };
+          })
+        };
+        func();
+      };
+    </script>
+  </body>
+</html>
